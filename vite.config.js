@@ -1,5 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
+import path from 'path';
+import crypto from 'crypto';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -19,7 +21,16 @@ export default defineConfig({
 			}
 		},
 		modules: {
-			generateScopedName: '[name]__[local]--[hash:base64:5]', // '[path][name]__[local]--[hash:base64:5]'  '[name]__[local]___[hash:base64:5]'
+			/* generateScopedName: '[name]__[local]--[hash:base64:5]'  '[path][name]__[local]--[hash:base64:5]'  '[name]__[local]___[hash:base64:5]' */
+			generateScopedName: (className, filePath) => {
+				const fileName = path.basename(filePath, '.module.scss' /* or '.module.css' for css */)
+				const hash = crypto
+				  .createHash('sha256')
+				  .update(fileName.concat(className))
+				  .digest('hex')
+				  .substring(0, 5)
+				return `${fileName}__${className}__${hash}`
+			  },
 		}
 	}
 });
