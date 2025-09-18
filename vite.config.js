@@ -10,5 +10,17 @@ export default defineConfig({
 				plugins: ['@emotion/babel-plugin']
 			}
 		})
-	]
+	],
+	css: {
+		preprocessorOptions: {
+			scss: {
+				api: 'modern-compiler', // or "modern"
+				silenceDeprecations: ['legacy-js-api'],
+			}
+		},
+		modules: {
+			generateScopedName: '[name]__[local]--[hash:base64:5]', // '[path][name]__[local]--[hash:base64:5]'  '[name]__[local]___[hash:base64:5]'
+		}
+	}
 });
+
