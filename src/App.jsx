@@ -1,14 +1,8 @@
-import logo from './assets/images/logo.svg';
-/* import logo from '/images/logo.svg' */
 import './App.scss';
+import Sandbox from './components/Sandbox';
 
 function App() {
-	return (
-		<div className="app">
-			<img src={logo} alt="" />
-		</div>
-	);
+	return <Sandbox />;
 }
 
 export default App;
-
