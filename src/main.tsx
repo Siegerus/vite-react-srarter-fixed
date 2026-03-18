@@ -1,9 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 
 import App from './App';
 import './main.scss';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-	<App />
+	<React.StrictMode>
+		<BrowserRouter
+			future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+		>
+			<App />
+		</BrowserRouter>
+	</React.StrictMode>
 );
