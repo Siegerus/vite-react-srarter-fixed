@@ -1,3 +1,5 @@
+import React from 'react';
+
 import './App.scss';
 import Sandbox from './components/Sandbox';
 
