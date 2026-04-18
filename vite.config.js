@@ -14,6 +14,7 @@ export default defineConfig({
 		})
 	],
 	css: {
+		devSourcemap: true,
 		preprocessorOptions: {
 			scss: {
 				api: 'modern-compiler', // or "modern"
@@ -23,8 +24,9 @@ export default defineConfig({
 		modules: {
 			/* generateScopedName: '[name]__[local]--[hash:base64:5]'  '[path][name]__[local]--[hash:base64:5]'  '[name]__[local]___[hash:base64:5]' */
 			generateScopedName: (className, filePath) => {
+				const cleanPath = filePath.split('?')[0];
 				const fileName = path.basename(
-					filePath,
+					cleanPath,
 					'.module.scss' /* or '.module.css' for css */
 				);
 				const hash = crypto
@@ -32,7 +34,7 @@ export default defineConfig({
 					.update(fileName.concat(className))
 					.digest('hex')
 					.substring(0, 5);
-				return `${fileName}__${className}--${hash}`;
+				return `${fileName}-${className}--${hash}`;
 			}
 		}
 	}
